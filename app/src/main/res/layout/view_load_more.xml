@@ -11,7 +11,19 @@
         android:id="@+id/load_progress_bar"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_gravity="center|top"
         android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/no_more_data"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_no_more_data"
+        android:text="没有更多数据了"
+        android:layout_gravity="center|top"
+        android:gravity="center"
+        android:drawablePadding="5dp" />
+
 </FrameLayout>

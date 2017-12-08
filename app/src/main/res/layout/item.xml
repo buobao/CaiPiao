@@ -1,9 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="40dp">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_height="40dp"
+    android:background="@android:color/white">
     <TextView
-        android:id="@+id/tv_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/tv_no"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="2017123" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/read_num_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:elevation="2dp"
+            android:text="01" />
+
+        <TextView
+            android:id="@+id/read_num_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:elevation="2dp"
+            android:text="09" />
+
+        <TextView
+            android:id="@+id/read_num_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:elevation="2dp"
+            android:text="14" />
+
+        <TextView
+            android:id="@+id/read_num_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:elevation="2dp"
+            android:text="21" />
+
+        <TextView
+            android:id="@+id/read_num_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:elevation="2dp"
+            android:textStyle="bold"
+            android:text="28" />
+
+        <TextView
+            android:id="@+id/read_num_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_red_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:elevation="2dp"
+            android:text="33" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/blue_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_blue_bg"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        android:text="33" />
+
 </LinearLayout>

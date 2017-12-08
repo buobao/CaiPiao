@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.king.turman.caipiao.R;
 import com.king.turman.caipiao.net.bean.LotteryBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,14 @@ public class RefreshAdapter extends RecyclerView.Adapter<RefreshAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(mList.get(position).getNo());
+        holder.no.setText(mList.get(position).getNo());
+        holder.redNum1.setText(mList.get(position).getNumbers().get(0));
+        holder.redNum2.setText(mList.get(position).getNumbers().get(1));
+        holder.redNum3.setText(mList.get(position).getNumbers().get(2));
+        holder.redNum4.setText(mList.get(position).getNumbers().get(3));
+        holder.redNum5.setText(mList.get(position).getNumbers().get(4));
+        holder.redNum6.setText(mList.get(position).getNumbers().get(5));
+        holder.blueNum.setText(mList.get(position).getNumbers().get(6));
     }
 
     @Override
@@ -43,11 +51,20 @@ public class RefreshAdapter extends RecyclerView.Adapter<RefreshAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView no;
+        TextView redNum1,redNum2,redNum3,redNum4,redNum5,redNum6;
+        TextView blueNum;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.tv_text);
+            no = itemView.findViewById(R.id.tv_no);
+            redNum1 = itemView.findViewById(R.id.read_num_1);
+            redNum2 = itemView.findViewById(R.id.read_num_2);
+            redNum3 = itemView.findViewById(R.id.read_num_3);
+            redNum4 = itemView.findViewById(R.id.read_num_4);
+            redNum5 = itemView.findViewById(R.id.read_num_5);
+            redNum6 = itemView.findViewById(R.id.read_num_6);
+            blueNum = itemView.findViewById(R.id.blue_num);
         }
     }
 }
