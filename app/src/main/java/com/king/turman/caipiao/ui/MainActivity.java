@@ -1,6 +1,7 @@
 package com.king.turman.caipiao.ui;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -95,7 +95,8 @@ public class MainActivity extends RxAppCompatActivity {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.blue_time:
-                    Toast.makeText(MainActivity.this, "蓝球趋势", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this,BlueBallActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.num_times:
                     Toast.makeText(MainActivity.this, "位次频率", Toast.LENGTH_LONG).show();
