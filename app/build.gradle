@@ -41,7 +41,6 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.android.support:recyclerview-v7:26.+'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
