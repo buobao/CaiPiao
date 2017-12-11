@@ -4,15 +4,17 @@
     <title>ECharts</title>
 </head>
 <body>
-<div id="main" style="width:100%;height:400px"></div>
+<div id="main" style="width:100%;height:450px"></div>
+<div id="main2" style="width:100%;height:450px;margin-top:20px"></div>
 <!-- ECharts单文件引入 -->
 <script src="../echarts.min.js"></script>
 <script type="text/javascript">
 var arr = caipiao.numberCounts().split(";");
 var option = {
+    <!--backgroundColor: '#003',-->
     title : {
         text: '蓝球频次',
-        subtext: '近20期'
+        subtext: '近'+caipiao.numberSize()+'期'
     },
     tooltip : {
         trigger: 'axis'
@@ -26,7 +28,7 @@ var option = {
             mark : {show: true},
             dataView : {show: false, readOnly: false},
             magicType : {show: true, type: ['line', 'bar']},
-            restore : {show: false},
+            restore : {show: true},
             saveAsImage : {show: false}
         }
     },
@@ -47,11 +49,22 @@ var option = {
             name:'频次',
             type:'bar',
             data:arr,
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
+            <!--markPoint : {-->
+                <!--data : [-->
+                    <!--{type : 'max', name: '最大值'},-->
+                    <!--{type : 'min', name: '最小值'}-->
+                <!--]-->
+            <!--},-->
+            itemStyle: {
+                    normal:{
+                        color: 'rgba(0,87,231,0.7)'
+                    },
+                    //鼠标悬停时：
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
             }
         }
     ]
@@ -59,5 +72,78 @@ var option = {
 
     var myChart = echarts.init(document.getElementById('main'));
     myChart.setOption(option);
+
+    var option2 = {
+    title : {
+        text: '蓝球频次统计',
+        subtext: '近'+caipiao.numberSize()+'期',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: false, readOnly: false},
+            magicType : {
+                show: true,
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: false}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'次数',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:arr[0], name:'01'},
+                {value:arr[1], name:'02'},
+                {value:arr[2], name:'03'},
+                {value:arr[3], name:'04'},
+                {value:arr[4], name:'05'},
+                {value:arr[5], name:'06'},
+                {value:arr[6], name:'07'},
+                {value:arr[7], name:'08'},
+                {value:arr[8], name:'09'},
+                {value:arr[9], name:'10'},
+                {value:arr[10], name:'11'},
+                {value:arr[11], name:'12'},
+                {value:arr[12], name:'13'},
+                {value:arr[13], name:'14'},
+                {value:arr[14], name:'15'},
+                {value:arr[15], name:'16'},
+            ]
+        }
+    ]
+};
+
+
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    myChart2.setOption(option2);
+
+
+
+
     </script>
 </body>

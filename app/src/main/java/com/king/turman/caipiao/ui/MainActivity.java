@@ -114,7 +114,7 @@ public class MainActivity extends RxAppCompatActivity {
                 .compose(this.bindToLifecycle())
                 .subscribe(s -> {
                     currentPage++;
-                    datas.addAll(HtmlUtil.getLotteryListFromString(s));
+                    datas.addAll(s);
                     swipeRefreshLayout.setRefreshing(false);
                     stringAdapter.notifyDataSetChanged();
                 },throwable -> {

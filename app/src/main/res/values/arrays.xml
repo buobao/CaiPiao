@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingarr">
+        <item>近100期</item>
+        <item>近200期</item>
+        <item>近300期</item>
+        <item>近400期</item>
+    </string-array>
+</resources>

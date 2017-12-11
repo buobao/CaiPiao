@@ -1,7 +1,15 @@
 package com.king.turman.caipiao.net;
 
+import com.king.turman.caipiao.net.bean.LotteryBean;
+import com.king.turman.caipiao.net.utils.HtmlUtil;
+
+import java.util.List;
+
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -19,10 +27,16 @@ public class NetRequest {
         return commonApi;
     }
 
-    public static Observable<String> getLottery(String path) {
+    public static Observable<List<LotteryBean>> getLottery(String path) {
         return getCommonService().getLottery(path)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Function<String, Observable<List<LotteryBean>>>() {
+                    @Override
+                    public Observable<List<LotteryBean>> apply(@NonNull String s) throws Exception {
+                        return Observable.just(HtmlUtil.getLotteryListFromString(s));
+                    }
+                });
 
     }
 }
