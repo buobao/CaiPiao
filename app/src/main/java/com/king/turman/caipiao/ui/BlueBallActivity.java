@@ -2,6 +2,7 @@ package com.king.turman.caipiao.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ public class BlueBallActivity extends BaseActivity {
 
     private List<LotteryBean> datas;
     private ArrayList<Integer> nums;
+    private Map<String, ArrayList<Double>> singleNumCounts;
     private WebView mWebView;
     private Spinner spinner;
     private int currentShowCount = 100;
@@ -33,6 +35,10 @@ public class BlueBallActivity extends BaseActivity {
 
         datas = new ArrayList<>();
         nums = new ArrayList<>();
+        singleNumCounts = new HashMap<>();
+        for (int i=1;i<=16;i++) {
+            singleNumCounts.put(i+"",new ArrayList<>());
+        }
 
         spinner = (Spinner) findViewById(R.id.select_num);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -70,6 +76,16 @@ public class BlueBallActivity extends BaseActivity {
                 return currentShowCount + "";
             }
 
+            @JavascriptInterface
+            public String getSingleArr(String num) {
+                ArrayList<Double> numArr = singleNumCounts.get(num+"");
+                String resultStr = "";
+                for (Double aDouble : numArr) {
+                    resultStr = resultStr + aDouble +";";
+                }
+                return resultStr;
+            }
+
         }, "caipiao");
 
         getData(currentShowCount);
@@ -78,6 +94,9 @@ public class BlueBallActivity extends BaseActivity {
     private void getData(int currentShowCount) {
         datas.clear();
         nums.clear();
+        for (String s : singleNumCounts.keySet()) {
+            singleNumCounts.get(s).clear();
+        }
         int pageCount = currentShowCount/20;
 
         ArrayList<Observable<List<LotteryBean>>> observables = new ArrayList<>();
@@ -93,6 +112,7 @@ public class BlueBallActivity extends BaseActivity {
 
                     if (datas.size() >= currentShowCount) {
                         Map<String,Integer> numsMap = new HashMap<>();
+                        Map<String,Integer> tempMap = new HashMap<>();
                         for (int i = 0; i < datas.size(); i++) {
                             int blueBallIndex = datas.get(i).getNumbers().size()-1;
                             String numKey = datas.get(i).getNumbers().get(blueBallIndex);
@@ -100,6 +120,29 @@ public class BlueBallActivity extends BaseActivity {
                                 numsMap.put(numKey, numsMap.get(numKey) + 1);
                             } else {
                                 numsMap.put(datas.get(i).getNumbers().get(blueBallIndex),1);
+                            }
+
+                            if (tempMap.containsKey(numKey)) {
+                                tempMap.put(numKey, tempMap.get(numKey) + 1);
+                            } else {
+                                tempMap.put(datas.get(i).getNumbers().get(blueBallIndex),1);
+                            }
+
+                            if ((i+1) % 20 == 0 && i > 0) {
+                                for (int ii=1;ii<=16;ii++) {
+                                    boolean flag = false;
+                                    for (String s1 : tempMap.keySet()) {
+                                        if (Integer.parseInt(s1) == ii) {
+                                            singleNumCounts.get(ii+"").add(tempMap.get(s1)/20.0);
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!flag) {
+                                        singleNumCounts.get(ii+"").add(0.0);
+                                    }
+                                }
+                                tempMap.clear();
                             }
                         }
 
@@ -116,9 +159,7 @@ public class BlueBallActivity extends BaseActivity {
 
                         mWebView.loadUrl("file:///android_asset/html/blue_ball_bar_chart.html");
                     }
-                },throwable -> {
-                    throwable.printStackTrace();
-                });
+                },throwable -> throwable.printStackTrace());
     }
 
     @Override
